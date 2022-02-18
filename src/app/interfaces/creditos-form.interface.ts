@@ -4,7 +4,8 @@ export interface CreditosForm {
   monto:number;
   valorcuota:number;
   fecha:string;
-  plazo:string;
+  periodo:string;
+  cantidadCuotas:number;
   comentario:string;
   estado:boolean;
 }

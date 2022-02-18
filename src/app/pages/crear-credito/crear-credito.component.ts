@@ -44,6 +44,9 @@ export class CrearCreditoComponent implements OnInit {
   public getCreditoById = (idCliente:any) => {
     this.creditoServ.getCreditoByIdService(idCliente).subscribe( (resp:any) =>{
 
+      console.log(resp);
+      
+
       if( resp.credito[0].estado_cred ){
         Swal.fire('Crédito activo', 'No se puede crear créditos para este cliente.', 'error');
         this.creditoActivo = true;
@@ -53,7 +56,7 @@ export class CrearCreditoComponent implements OnInit {
         return;
       }
 
-    })
+    }, error =>{})
   }
 
 
@@ -69,12 +72,11 @@ export class CrearCreditoComponent implements OnInit {
       return;
     }
 
-    console.log(this.formCrearCredito.value)
     this.creditoServ.createCreditoService( this.formCrearCredito.value, this.idCliente ).subscribe( (resp:any) =>{
 
       Swal.fire('Bien!', resp.msg, 'success');
       //setTimeout(() => { window.location.reload(); }, 2000);
-      setTimeout(() => { this.router.navigate(['dashboard/lista-creditos']); }, 2000);
+      setTimeout(() => { this.router.navigate(['dashboard/lista-creditos']); }, 1500);
 
     }, (err) =>{
       Swal.fire('Error', err.error.msg, 'error');
@@ -92,7 +94,8 @@ export class CrearCreditoComponent implements OnInit {
     this.formCrearCredito = this.fb.group({
       monto: ['', [Validators.required, Validators.minLength(4)]],
       fecha: ['', [Validators.required]],
-      plazo: ['', [Validators.required, Validators.minLength(5)]],
+      periodo: ['', [Validators.required]],
+      cantidadCuotas: ['', [Validators.required, Validators.minLength(1)]],
       valorcuota: ['', [Validators.required, Validators.minLength(4)]],
       comentario: ['', [Validators.required, Validators.minLength(5)]],
     })

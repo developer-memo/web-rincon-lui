@@ -10,8 +10,8 @@
 
     <div *ngIf=" !creditoActivo " class="card">
       <div class="card-body">
-        <h4 class="card-title">Crear clientes nuevos</h4>
-        <h6 class="card-subtitle">En el siguiente formulario, puede crear clientes.</h6>
+        <h4 class="card-title">Crear credito nuevo</h4>
+        <h6 class="card-subtitle">En el siguiente formulario, puede crear créditos.</h6>
         <form [formGroup]="formCrearCredito" (submit)="crearCredito()" class="form-material m-t-40">
 
           <div class="row">
@@ -32,14 +32,25 @@
           </div>
 
           <div class="row">
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-4 col-md-6">
               <div class="form-group">
-                <label>Plazo de crédito</label>
-                <input type="number" formControlName="plazo" class="form-control">
-                <p class="text-danger" *ngIf="campoNoValido('plazo')">*Plazo requerido.</p>
+                <label>Periodo de pago</label>
+                <select name="" formControlName="periodo" class="form-control">
+                  <option value="semanal">Semanal</option>
+                  <option value="quincenal">Quincenal</option>
+                  <option value="mensual">Mensual</option>
+                </select>
+                <p class="text-danger" *ngIf="campoNoValido('periodo')">*Plazo requerido.</p>
               </div>
             </div>
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-4 col-md-6">
+              <div class="form-group">
+                <label>Cantidad cuotas</label>
+                <input type="number" formControlName="cantidadCuotas" class="form-control">
+                <p class="text-danger" *ngIf="campoNoValido('cantidadCuotas')">*Plazo requerido.</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
               <div class="form-group">
                 <label>Valor cuota</label>
                 <input type="number" formControlName="valorcuota" class="form-control">

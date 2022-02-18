@@ -21,6 +21,7 @@ export class ListaClientesComponent implements OnInit {
     this.getAllClientes();
   }
 
+  
 
   /**
    * Método para obtener los clientes

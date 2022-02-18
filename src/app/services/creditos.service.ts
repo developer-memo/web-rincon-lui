@@ -32,11 +32,13 @@ export class CreditosService {
       idUs,
       monto: formData.monto,
       fecha: formData.fecha,
-      plazo: formData.plazo,
+      periodo: formData.periodo,
+      cantidad: formData.cantidadCuotas,
       valorcuota: formData.valorcuota,
       comentario: formData.comentario
     }
-
+    
+  
     return this.http.post(`${BASE_URL}/insertCredito`, json, this.httpOptions).pipe(
       tap( resp => resp )
     )
@@ -78,7 +80,7 @@ export class CreditosService {
     const json = {
       idCredito,
       monto: formData.monto,
-      plazo: formData.plazo,
+      periodo: formData.periodo,
       valorcuota: formData.valorcuota,
       comentario: formData.comentario, 
       estado: formData.estado == true? 1 : 0
