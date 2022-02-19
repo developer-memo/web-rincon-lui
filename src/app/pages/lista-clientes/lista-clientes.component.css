@@ -1,0 +1,16 @@
+
+.table_clientes .td_avatar {
+  display: flex;
+  align-items: initial;
+  justify-content: flex-start;
+}
+.table_clientes .td_avatar img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow: hidden;
+}
+.table_clientes .td_acciones button {
+  padding: 2px 10px;
+} 

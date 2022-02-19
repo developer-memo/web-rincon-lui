@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Router } from '@angular/router';
+import { ClienteGeneroMap, ClienteStatusMap } from 'src/app/models/usuario.model';
 
 @Component({
   selector: 'app-lista-clientes',
@@ -9,6 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./lista-clientes.component.css']
 })
 export class ListaClientesComponent implements OnInit {
+
+  public clienteStatusMap = ClienteStatusMap;
+  public clienteGeneroMap = ClienteGeneroMap;
 
   public clientes:any[] = [];
 
