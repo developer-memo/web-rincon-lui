@@ -707,7 +707,14 @@ Layouts
   border: 0px;
   border-radius: 0px;
   -webkit-box-shadow: none;
-  box-shadow: none; }
+  box-shadow: none; 
+}
+
+.card-no-border .card .card-img {
+  height: 335px;
+  overflow: hidden;
+  object-fit: cover;
+}
 
 .card-no-border .shadow-none {
   -webkit-box-shadow: none;

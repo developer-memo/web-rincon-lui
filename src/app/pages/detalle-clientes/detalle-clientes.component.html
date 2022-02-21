@@ -2,13 +2,13 @@
   <!-- Column -->
   <div class="col-lg-4 col-xlg-3 col-md-5">
     <div class="card"> <img class="card-img" src="../assets/images/background/fondoPerfil.jpg" alt="Card image">
-      <div class="card-img-overlay card-inverse social-profile d-flex text-center">
+      <div class="card-img-overlay card-inverse social-profile text-center">
         <div class="align-self-center">
           <img *ngIf=" cliente['genero_us'] === 'M' " src="../assets/images/hombre.png" class="img-circle" width="100">
           <img *ngIf=" cliente['genero_us'] === 'F' " src="../assets/images/mujer.png" class="img-circle" width="100">
           <h4 class="card-title">{{cliente['nombre_us']}}</h4>
           <h6 class="card-subtitle">{{cliente['email_us']}}</h6>
-          <p class="text-white">Prestamo del cliente </p>
+          <p class="text-white">Crédito del cliente </p>
           <span *ngIf="cliente['estado_us'] === 1" class="label label-warning label-rounded">Activo</span>
           <span *ngIf="cliente['estado_us'] === 0" class="label label-danger label-rounded">Inactivo</span>
         </div>

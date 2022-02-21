@@ -29,7 +29,7 @@ export class DetalleClientesComponent implements OnInit {
       this.cliente = JSON.parse( data['cliente'] ) || [];
     });
 
-    this.iniciarFormulario();
+    this.iniciarFormulario();    
     
   }
 

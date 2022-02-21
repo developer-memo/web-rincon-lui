@@ -49,6 +49,7 @@ export class CrearCreditoComponent implements OnInit {
 
       if( resp.credito[0].estado_cred ){
         Swal.fire('Crédito activo', 'No se puede crear créditos para este cliente.', 'error');
+        setTimeout(() => { Swal.close() }, 2000);
         this.creditoActivo = true;
 
       }else{
@@ -76,10 +77,11 @@ export class CrearCreditoComponent implements OnInit {
 
       Swal.fire('Bien!', resp.msg, 'success');
       //setTimeout(() => { window.location.reload(); }, 2000);
-      setTimeout(() => { this.router.navigate(['dashboard/lista-creditos']); }, 1500);
+      setTimeout(() => { this.router.navigate(['dashboard/lista-creditos']); Swal.close() }, 1500);
 
     }, (err) =>{
       Swal.fire('Error', err.error.msg, 'error');
+      setTimeout(() => { Swal.close() }, 2000);
     })
 
   }

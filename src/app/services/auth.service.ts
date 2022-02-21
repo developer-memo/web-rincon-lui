@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { LoginForm } from '../interfaces/login-form.interface';
+import Swal from 'sweetalert2';
 
 const BASE_URL: String = environment.base_url;
 
@@ -76,6 +77,7 @@ export class AuthService {
     localStorage.removeItem('finanzas');
     localStorage.removeItem('Ingresado');
     this.router.navigateByUrl('/login');
+    Swal.close();
   }
 
 
