@@ -4,35 +4,6 @@
     <h6 class="card-subtitle m-b-20 text-muted">Puede visualizar la información de cada crédito dando click en el ID del crédito Abierto. </h6>
   </div>
 
-  <div class="col-lg-6 col-md-6">
-    <div class="card bg-info text-white">
-      <div class="card-body">
-        <div class="d-flex">
-          <div class="stats">
-            <h1 class="text-white"> {{finanzas[0]?.base_pres_fina | currency: 'USD'}} </h1>
-            <h6 class="text-white">Base prestamos</h6>
-            <button routerLink="/dashboard/lista-pagos" class="btn btn-rounded btn-outline btn-light m-t-10 font-14">Ver pagos</button>
-          </div>
-          <div class="stats-icon text-right ml-auto"><i class="fa fa-dollar display-5 op-3 text-dark"></i></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-6 col-md-6">
-    <div class="card bg-success text-white">
-      <div class="card-body">
-        <div class="d-flex">
-          <div class="stats">
-            <h1 class="text-white"> {{totalPagos | currency: 'USD'}} </h1>
-            <h6 class="text-white">Total en pagos</h6>
-            <button routerLink="/dashboard/lista-pagos" class="btn btn-rounded btn-outline btn-light m-t-10 font-14">Ver pagos</button>
-          </div>
-          <div class="stats-icon text-right ml-auto"><i class="fa fa-money display-5 op-3 text-dark"></i></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 
   <div *ngFor=" let credito of creditos " class="col-lg-6 col-md-6">
     <div class="ribbon-wrapper card">

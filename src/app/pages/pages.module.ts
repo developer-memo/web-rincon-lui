@@ -21,6 +21,7 @@ import { ListaCreditosComponent } from './lista-creditos/lista-creditos.componen
 import { DatosFinanzasComponent } from './datos-finanzas/datos-finanzas.component';
 import { ListaIngresosComponent } from './lista-ingresos/lista-ingresos.component';
 import { ListaEgresosComponent } from './lista-egresos/lista-egresos.component';
+import { AgregarMercanciaComponent } from './almacen/agregar-mercancia/agregar-mercancia.component';
 
 
 
@@ -41,7 +42,8 @@ import { ListaEgresosComponent } from './lista-egresos/lista-egresos.component';
     ListaCreditosComponent,
     DatosFinanzasComponent,
     ListaIngresosComponent,
-    ListaEgresosComponent
+    ListaEgresosComponent,
+    AgregarMercanciaComponent
   ],
   exports: [
     DashboardComponent,

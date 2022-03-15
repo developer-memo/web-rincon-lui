@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Agregar mercancía nueva</h4>
+        <h6 class="card-subtitle">En el siguiente formulario, puede ingresar la mercancía para dar orden al inventario.</h6>
+        <form [formGroup]="formAgregarMercancia" (submit)="agregarMercancia()" class="form-material m-t-40">
+
+          <div class="row">
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group">
+                <label>Tipo mercancía</label>
+                <select formControlName="tipo" class="form-control">
+                  <option value="Calzado">Calzado</option>
+                  <option value="Camisa">Camisa</option>
+                  <option value="Camiseta">Camiseta</option>
+                  <option value="Chaqueta">Chaqueta</option>
+                  <option value="Pantalón">Pantalón</option>
+                  <option value="Pantaloneta">Pantaloneta</option>
+                  <option value="Sudaderas">Sudaderas</option>
+                  <option value="Sabanas">Sabanas</option>
+                  <option value="Acolchados">Acolchados</option>
+                  <option value="Cortinas">Cortinas</option>
+                  <option value="Tohallas">Tohallas</option>
+                </select>
+                <p class="text-danger" *ngIf="campoNoValido('tipo')">*Tipo requerido.</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group">
+                <label>Marca</label>
+                <select formControlName="marca" class="form-control">
+                  <option value="Adidas">Adidas</option>
+                  <option value="Nike">Nike</option>
+                  <option value="Reebok">Reebok</option>
+                </select>
+                <p class="text-danger" *ngIf="campoNoValido('marca')">*Marca requerida.</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group">
+                <label>Género</label>
+                <select formControlName="genero" class="form-control">
+                  <option value="M">Mujer</option>
+                  <option value="H">Hombre</option>
+                  <option value="I">Infantil</option>
+                  <option value="C">Hogar</option>
+                </select>
+                <p class="text-danger" *ngIf="campoNoValido('genero')">*Género requerido.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group">
+                <label>Cantidad</label>
+                <input type="number" formControlName="cantidad" min="0" class="form-control">
+                <p class="text-danger" *ngIf="campoNoValido('cantidad')">*Cantidad requerida.</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group">
+                <label>Valor unidad</label>
+                <input type="number" formControlName="valor" min="0" class="form-control">
+                <p class="text-danger" *ngIf="campoNoValido('valor')">*Valor requerido.</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group">
+                <label>Fecha ingreso</label>
+                <input type="date" formControlName="fecha" class="form-control">
+                <p class="text-danger" *ngIf="campoNoValido('fecha')">*Fecha requerida.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label>Comentario</label>
+                <textarea formControlName="comentario" rows="3" class="form-control"></textarea>
+                <p class="text-danger" *ngIf="campoNoValido('comentario')">*Comentario requerido.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <button type="submit" class="btn waves-effect waves-light btn-rounded btn-info">Agregar mercancía</button>
+              &nbsp;
+              <button type="button" class="btn waves-effect waves-light btn-rounded btn-danger">Volver</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

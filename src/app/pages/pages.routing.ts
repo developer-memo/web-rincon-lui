@@ -18,6 +18,7 @@ import { DetalleCreditoComponent } from './detalle-credito/detalle-credito.compo
 import { DatosFinanzasComponent } from './datos-finanzas/datos-finanzas.component';
 import { ListaIngresosComponent } from './lista-ingresos/lista-ingresos.component';
 import { ListaEgresosComponent } from './lista-egresos/lista-egresos.component';
+import { AgregarMercanciaComponent } from './almacen/agregar-mercancia/agregar-mercancia.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
       { path: 'crear-cliente', component: CrearClienteComponent, data: {titulo: 'Crear cliente'} },
       { path: 'crear-pagos/:credito', component: CrearPagosComponent, data: {titulo: 'Crear pagos'} },
       { path: 'crear-credito/:idUs', component: CrearCreditoComponent, data: {titulo: 'Crear crédito'} },
+      { path: 'agregar-mercancia', component: AgregarMercanciaComponent, data: {titulo: 'Agregar mercancía'} },
     ]
   },
 ];

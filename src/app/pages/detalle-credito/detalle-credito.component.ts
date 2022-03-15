@@ -55,6 +55,7 @@ export class DetalleCreditoComponent implements OnInit {
 
     }, (err) =>{
       Swal.fire('Advertencia', 'No hay créditos para este cliente.', 'warning');
+      setTimeout(() => Swal.close(), 2000);
       this.creditoActivo = true;
     })
   }
