@@ -7,10 +7,10 @@
         <form [formGroup]="formAgregarMercancia" (submit)="agregarMercancia()" class="form-material m-t-40">
 
           <div class="row">
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-3 col-md-3">
               <div class="form-group">
                 <label>Tipo mercancía</label>
-                <select formControlName="tipo" class="form-control">
+                <select formControlName="tipo" (change)="getTipoMercanciaValue($event.target)"  class="form-control">
                   <option value="Calzado">Calzado</option>
                   <option value="Camisa">Camisa</option>
                   <option value="Camiseta">Camiseta</option>
@@ -26,7 +26,7 @@
                 <p class="text-danger" *ngIf="campoNoValido('tipo')">*Tipo requerido.</p>
               </div>
             </div>
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-3 col-md-3">
               <div class="form-group">
                 <label>Marca</label>
                 <select formControlName="marca" class="form-control">
@@ -37,7 +37,7 @@
                 <p class="text-danger" *ngIf="campoNoValido('marca')">*Marca requerida.</p>
               </div>
             </div>
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-3 col-md-3">
               <div class="form-group">
                 <label>Género</label>
                 <select formControlName="genero" class="form-control">
@@ -47,6 +47,17 @@
                   <option value="C">Hogar</option>
                 </select>
                 <p class="text-danger" *ngIf="campoNoValido('genero')">*Género requerido.</p>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+              <div class="form-group">
+                <label>Talla</label>
+                <select formControlName="talla" class="form-control">
+                  <option *ngFor="let talla of dataTalla" value="{{talla.key}}">
+                    {{talla.name}}
+                  </option>
+                </select>
+                <p class="text-danger" *ngIf="campoNoValido('talla')">*Talla requerida.</p>
               </div>
             </div>
           </div>
