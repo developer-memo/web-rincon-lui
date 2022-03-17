@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataTallaCalzado, DataTallaRopa } from 'src/app/mockdata/mockdata-tallas';
+import { MercanciaService } from 'src/app/services/mercancia.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-agregar-mercancia',
@@ -27,6 +29,7 @@ export class AgregarMercanciaComponent implements OnInit {
   constructor(
               private fb: FormBuilder,
               private router: Router,
+              private mercanciaSvc: MercanciaService,
   ) { }
 
   ngOnInit(): void {
@@ -57,7 +60,14 @@ export class AgregarMercanciaComponent implements OnInit {
       return; 
     }
 
-    console.log(this.formAgregarMercancia.value);
+    this.mercanciaSvc.insertMercanciaService(this.formAgregarMercancia.value).subscribe( (resp:any) =>{
+      Swal.fire('Bien!', resp.msg, 'success');
+      setTimeout(() => { Swal.close() }, 1500);
+      
+    }, (err) =>{
+      Swal.fire('Error', err.error.msg, 'error');
+      setTimeout(() => { Swal.close() }, 2000);
+    });
     
 
   }
