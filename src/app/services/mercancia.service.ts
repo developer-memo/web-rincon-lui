@@ -32,7 +32,16 @@ export class MercanciaService {
 
 
 
+  /**
+   * Método GET de servicio para obtener toda la mercancia
+   */
+  public getAllMercanciaService = () =>{
+    return this.http.get(`${BASE_URL}/allMercancia`, this.httpOptions).pipe( map( resp => resp ) )
+  }
 
+
+
+ 
 
     
 }

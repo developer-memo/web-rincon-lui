@@ -48,7 +48,7 @@
             <div class="row">
               <div class="col-lg-4 col-md-4">
                 <small class="text-muted">Monto crédito </small>
-                <h6>{{ credito[0]?.monto_cred | currency: 'USD' }}</h6>
+                <h6>{{ credito[0]?.monto_cred | currency: 'USD':'symbol':'3.0' }}</h6>
               </div>
               <div class="col-lg-4 col-md-4">
                 <small class="text-muted">Fecha crédito </small>
@@ -63,7 +63,7 @@
             <div class="row">
               <div class="col-lg-4 col-md-4">
                 <small class="text-muted">Valor cuota </small>
-                <h6>{{ credito[0]?.valorcuota_cred | currency: 'USD' }}</h6>
+                <h6>{{ credito[0]?.valorcuota_cred | currency: 'USD':'symbol':'3.0' }}</h6>
               </div>
               <div class="col-lg-4 col-md-4">
                 <small class="text-muted">Cuotas pagadas </small>
@@ -71,7 +71,7 @@
               </div>
               <div class="col-lg-4 col-md-4">
                 <small class="text-muted">Total pagado </small>
-                <h6> {{totalPagado | currency: 'USD'}} </h6>
+                <h6> {{totalPagado | currency: 'USD':'symbol':'3.0'}} </h6>
               </div>
             </div>
             <br>
@@ -182,7 +182,7 @@
             <tbody>
                 <tr *ngFor=" let pago of pagos " >
                     <td> {{pago.id_pag}} </td>
-                    <td> {{pago.valor_pag | currency: 'USD'}} </td>
+                    <td> {{pago.valor_pag | currency: 'USD':'symbol':'3.0'}} </td>
                     <td> {{pago.nombre_us}} </td>
                     <td> {{pago.fecha_pag | date: 'dd/MM/yyyy'}} </td>
                     <td><span (click)="navegarVerPagos(pago)" class="cursor label label-info">Ver pago</span></td>

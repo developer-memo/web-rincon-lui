@@ -1,0 +1,28 @@
+  <table class="table table_mercancia">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tipo</th>
+        <th>Marca</th>
+        <th>Cantidad</th>
+        <th>Valor(u)</th>
+        <th>Talla</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let merca of arrMercancia ">
+        <td> {{merca.id_merca}} </td>
+        <td> {{merca.tipo_merca}} </td>
+        <td> {{merca.marca_merca}} </td>
+        <td> {{merca.cantidad_merca}} </td>
+        <td> {{merca.valor_merca | currency: 'USD':'symbol':'3.0' }} </td>
+        <td> {{merca.talla_merca}} </td>
+        <td class="td_acciones">
+          <button type="button" class="btn btn-small btn-success btn-rounded" (click)="detalleMerca(merca)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>
+          &nbsp;
+          <button type="button" class="btn btn-small btn-danger btn-rounded" > <i class="fa fa-trash" aria-hidden="true"></i> </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

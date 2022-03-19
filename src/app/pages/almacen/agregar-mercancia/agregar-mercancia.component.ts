@@ -62,7 +62,7 @@ export class AgregarMercanciaComponent implements OnInit {
 
     this.mercanciaSvc.insertMercanciaService(this.formAgregarMercancia.value).subscribe( (resp:any) =>{
       Swal.fire('Bien!', resp.msg, 'success');
-      setTimeout(() => { Swal.close() }, 1500);
+      setTimeout(() => { this.router.navigate(['dashboard/lista-mercancia']); Swal.close() }, 1500);
       
     }, (err) =>{
       Swal.fire('Error', err.error.msg, 'error');

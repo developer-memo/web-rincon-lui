@@ -22,6 +22,9 @@ import { DatosFinanzasComponent } from './datos-finanzas/datos-finanzas.componen
 import { ListaIngresosComponent } from './lista-ingresos/lista-ingresos.component';
 import { ListaEgresosComponent } from './lista-egresos/lista-egresos.component';
 import { AgregarMercanciaComponent } from './almacen/agregar-mercancia/agregar-mercancia.component';
+import { ListaMercanciaComponent } from './almacen/lista-mercancia/lista-mercancia.component';
+import { TableListaMercanciaComponent } from './almacen/components/table-lista-mercancia/table-lista-mercancia.component';
+import { DetalleMercanciaComponent } from './almacen/detalle-mercancia/detalle-mercancia.component';
 
 
 
@@ -43,7 +46,10 @@ import { AgregarMercanciaComponent } from './almacen/agregar-mercancia/agregar-m
     DatosFinanzasComponent,
     ListaIngresosComponent,
     ListaEgresosComponent,
-    AgregarMercanciaComponent
+    AgregarMercanciaComponent,
+    ListaMercanciaComponent,
+    TableListaMercanciaComponent,
+    DetalleMercanciaComponent
   ],
   exports: [
     DashboardComponent,
