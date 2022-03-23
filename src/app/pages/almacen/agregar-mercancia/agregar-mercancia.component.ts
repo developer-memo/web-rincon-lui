@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataTallaCalzado, DataTallaRopa } from 'src/app/mockdata/mockdata-tallas';
+import { DataTallas } from 'src/app/mockdata/mockdata-tallas';
 import { MercanciaService } from 'src/app/services/mercancia.service';
 import Swal from 'sweetalert2';
 
@@ -41,12 +41,7 @@ export class AgregarMercanciaComponent implements OnInit {
    * @param event => Valor del select
    */
   public getTipoMercanciaValue = (event: any) =>{
-    if(event.value === 'Calzado') {
-      this.dataTalla = DataTallaCalzado;
-      
-    } else {
-      this.dataTalla = DataTallaRopa;
-    }
+    this.dataTalla = DataTallas;
   }
 
 

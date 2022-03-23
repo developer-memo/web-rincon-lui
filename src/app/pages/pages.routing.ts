@@ -46,7 +46,7 @@ const routes: Routes = [
       { path: 'crear-credito/:idUs', component: CrearCreditoComponent, data: {titulo: 'Crear crédito'} },
       { path: 'agregar-mercancia', component: AgregarMercanciaComponent, data: {titulo: 'Agregar mercancía'} },
       { path: 'lista-mercancia', component: ListaMercanciaComponent, data: {titulo: 'Lista de mercancía'} },
-      { path: 'detalle-mercancia', component: DetalleMercanciaComponent, data: {titulo: 'Detalle mercancía'} },
+      { path: 'detalle-mercancia/:id', component: DetalleMercanciaComponent, data: {titulo: 'Detalle mercancía'} },
     ]
   },
 ];

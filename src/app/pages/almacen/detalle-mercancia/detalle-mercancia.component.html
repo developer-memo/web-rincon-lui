@@ -1,1 +1,129 @@
-<div class="" ></div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs profile-tab" role="tablist">
+        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab" aria-expanded="true">Mercancía</a> </li>
+        <li class="nav-item"> <a class="nav-link" (click)="cargarEditFormulario()" data-toggle="tab" href="#settings" role="tab" aria-expanded="false">Configuración</a> </li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="profile" role="tabpanel" aria-expanded="true">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-3 col-xs-6 b-r"> <strong>Tipo mercancía</strong>
+                <br>
+                <p class="text-muted">{{ detaMerca.tipo_merca }}</p>
+              </div>
+              <div class="col-md-3 col-xs-6 b-r"> <strong>Marca</strong>
+                <br>
+                <p class="text-muted">{{ detaMerca.marca_merca }}</p>
+              </div>
+              <div class="col-md-3 col-xs-6 b-r"> <strong>Género</strong>
+                <br>
+                <p class="text-muted">{{ detaMerca.genero_merca }}</p>
+              </div>
+              <div class="col-md-3 col-xs-6"> <strong>Talla</strong>
+                <br>
+                <p class="text-muted">{{ detaMerca.talla_merca }}</p>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4 col-xs-6 b-r"> <strong>Cantidad</strong>
+                <br>
+                <p class="text-muted">{{ detaMerca.cantidad_merca }}</p>
+              </div>
+              <div class="col-md-4 col-xs-6 b-r"> <strong>Valor unidad</strong>
+                <br>
+                <p class="text-muted">{{ detaMerca.valor_merca | currency: 'USD':'symbol':'3.0' }}</p>
+              </div>
+              <div class="col-md-4 col-xs-6 b-r"> <strong>Fecha ingreso</strong>
+                <br>
+                <p class="text-muted">{{ detaMerca.fecha_merca | date:'dd/MMMM/YYYY' }}</p>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-12 b-r"> <strong>Comentario</strong>
+                <br>
+                <p class="text-muted">{{ detaMerca.comentario_merca }}</p>
+              </div>
+            </div>
+            <hr>
+            <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Volver</button>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="settings" role="tabpanel" aria-expanded="false">
+          <div class="card-body">
+            <!--<form [formGroup]="formEditCliente" (submit)="actualizarCliente()" class="form-horizontal form-material">
+               <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label>Nombre completo</label>
+                    <input type="text" formControlName="nombre" class="form-control">
+                    <p class="text-danger" *ngIf="campoNoValido('nombre')">*Nombre requerido.</p>
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label>Correo electrónico</label>
+                    <input type="email" formControlName="email" class="form-control">
+                    <p class="text-danger" *ngIf="campoNoValido('email')">*E-mail requerido.</p>
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label>Dirección</label>
+                    <input type="text" formControlName="direccion" class="form-control">
+                    <p class="text-danger" *ngIf="campoNoValido('direccion')">*Dirección requerida.</p>
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="number" formControlName="telefono" class="form-control">
+                    <p class="text-danger" *ngIf="campoNoValido('telefono')">*Teléfono requerido.</p>
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label>Género</label>
+                    <select formControlName="genero" class="form-control">
+                      <option value="M" >Masculino</option>
+                      <option value="F" >Femenino</option>
+                    </select>
+                    <p class="text-danger" *ngIf="campoNoValido('genero')">*Género requerido.</p>
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <div class="demo-checkbox">
+                      <input type="checkbox" formControlName="estado" id="md_checkbox_31" class="filled-in chk-col-light-green">
+                      <label *ngIf=" cliente['estado_us'] === 0 || cliente['estado_us'] === 1 " for="md_checkbox_31">Cliente activo <small class="text-muted">Puede inactivar el cliente si cancela el crédito. </small></label>
+                      <label *ngIf=" cliente['estado_us'] === 2 " for="md_checkbox_31">Cliente inactivo <small class="text-muted">Puede activar el cliente si inicia un crédito. </small></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-info">Actualizar cliente</button>
+                  &nbsp;
+                  <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Volver</button>
+                </div>
+              </div>
+            </form> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

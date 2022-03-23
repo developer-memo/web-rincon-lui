@@ -23,9 +23,9 @@ export class TableListaMercanciaComponent implements OnInit {
   /**
    * Emite el objeto al componente de detalle de mercancía
    */
-  public detalleMerca = (merca:any) =>{
-    //this.mercaById.emit(merca);
-    this.router.navigate(['dashboard/detalle-mercancia']);
+  public detalleMerca = (id:any) =>{
+    //this.mercaById.emit(merca);    
+    this.router.navigate(['dashboard/detalle-mercancia', id]);
   }
 
 }
