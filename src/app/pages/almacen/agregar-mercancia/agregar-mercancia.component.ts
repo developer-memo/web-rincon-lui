@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataTallas } from 'src/app/mockdata/mockdata-tallas';
+import { DataTallas, DataTipoMerca } from 'src/app/mockdata/mockdata-mercancia';
 import { MercanciaService } from 'src/app/services/mercancia.service';
 import Swal from 'sweetalert2';
 
@@ -14,6 +14,7 @@ export class AgregarMercanciaComponent implements OnInit {
 
   public formSubmitted = false;
   public dataTalla = [];
+  public dataTipo = [];
 
   public formAgregarMercancia = this.fb.group({
     tipo: ['', [Validators.required]],
@@ -33,6 +34,7 @@ export class AgregarMercanciaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.dataTipo = DataTipoMerca;
   }
 
 

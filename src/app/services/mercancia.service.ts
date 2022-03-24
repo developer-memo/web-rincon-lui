@@ -48,6 +48,13 @@ export class MercanciaService {
   }
 
 
+  /**
+   * Método PUT de servicio para actualizar mercancía por ID
+   */
+  public putMercaByIdService = (dataForm:any) =>{
+    return this.http.put(`${BASE_URL}/updateMercancia`, dataForm, this.httpOptions).pipe( tap( resp => resp ));
+  }
+
 
  
 

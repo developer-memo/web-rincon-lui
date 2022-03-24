@@ -11,17 +11,9 @@
               <div class="form-group">
                 <label>Tipo mercancía</label>
                 <select formControlName="tipo" (change)="getTipoMercanciaValue($event.target)"  class="form-control">
-                  <option value="Calzado">Calzado</option>
-                  <option value="Camisa">Camisa</option>
-                  <option value="Camiseta">Camiseta</option>
-                  <option value="Chaqueta">Chaqueta</option>
-                  <option value="Pantalón">Pantalón</option>
-                  <option value="Pantaloneta">Pantaloneta</option>
-                  <option value="Sudaderas">Sudaderas</option>
-                  <option value="Sabanas">Sabanas</option>
-                  <option value="Acolchados">Acolchados</option>
-                  <option value="Cortinas">Cortinas</option>
-                  <option value="Tohallas">Tohallas</option>
+                  <option *ngFor="let tipo of dataTipo" value="{{tipo.key}}">
+                    {{tipo.name}}
+                  </option>
                 </select>
                 <p class="text-danger" *ngIf="campoNoValido('tipo')">*Tipo requerido.</p>
               </div>

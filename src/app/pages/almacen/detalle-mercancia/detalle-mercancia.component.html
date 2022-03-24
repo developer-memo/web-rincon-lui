@@ -4,7 +4,7 @@
       <!-- Nav tabs -->
       <ul class="nav nav-tabs profile-tab" role="tablist">
         <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab" aria-expanded="true">Mercancía</a> </li>
-        <li class="nav-item"> <a class="nav-link" (click)="cargarEditFormulario()" data-toggle="tab" href="#settings" role="tab" aria-expanded="false">Configuración</a> </li>
+        <li class="nav-item"> <a class="nav-link" data-toggle="tab" (click)="getDataForm(detaMerca)" href="#settings" role="tab" aria-expanded="false">Configuración</a> </li>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">
@@ -40,7 +40,7 @@
               </div>
               <div class="col-md-4 col-xs-6 b-r"> <strong>Fecha ingreso</strong>
                 <br>
-                <p class="text-muted">{{ detaMerca.fecha_merca | date:'dd/MMMM/YYYY' }}</p>
+                <p class="text-muted">{{ detaMerca.fecha_merca | date:'dd/MM/YYYY' }}</p>
               </div>
             </div>
             <br>
@@ -52,77 +52,113 @@
             </div>
             <hr>
             <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Volver</button>
-            </div>
           </div>
         </div>
+
         <div class="tab-pane" id="settings" role="tabpanel" aria-expanded="false">
           <div class="card-body">
-            <!--<form [formGroup]="formEditCliente" (submit)="actualizarCliente()" class="form-horizontal form-material">
-               <div class="row">
-                <div class="col-lg-12">
+            <form [formGroup]="formEditMercancia" (submit)="actualizarMercancia()" class="form-horizontal form-material">
+              <div class="row">
+                <div class="col-lg-3 col-md-3">
                   <div class="form-group">
-                    <label>Nombre completo</label>
-                    <input type="text" formControlName="nombre" class="form-control">
-                    <p class="text-danger" *ngIf="campoNoValido('nombre')">*Nombre requerido.</p>
+                    <label>Tipo mercancía</label>
+                    <select formControlName="tipo"  class="form-control">
+                      <option value="Calzado">Calzado</option>
+                      <option value="Camisa">Camisa</option>
+                      <option value="Camiseta">Camiseta</option>
+                      <option value="Chaqueta">Chaqueta</option>
+                      <option value="Pantalón">Pantalón</option>
+                      <option value="Pantaloneta">Pantaloneta</option>
+                      <option value="Sudaderas">Sudaderas</option>
+                      <option value="Sabanas">Sabanas</option>
+                      <option value="Acolchados">Acolchados</option>
+                      <option value="Cortinas">Cortinas</option>
+                      <option value="Tohallas">Tohallas</option>
+                    </select>
+                    <p class="text-danger" *ngIf="campoNoValido('tipo')">*Tipo requerido.</p>
                   </div>
                 </div>
-
-                <div class="col-lg-12">
+                <div class="col-lg-3 col-md-3">
                   <div class="form-group">
-                    <label>Correo electrónico</label>
-                    <input type="email" formControlName="email" class="form-control">
-                    <p class="text-danger" *ngIf="campoNoValido('email')">*E-mail requerido.</p>
+                    <label>Marca</label>
+                    <select formControlName="marca" class="form-control">
+                      <option value="Adidas">Adidas</option>
+                      <option value="Nike">Nike</option>
+                      <option value="Reebok">Reebok</option>
+                    </select>
+                    <p class="text-danger" *ngIf="campoNoValido('marca')">*Marca requerida.</p>
                   </div>
                 </div>
-
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <label>Dirección</label>
-                    <input type="text" formControlName="direccion" class="form-control">
-                    <p class="text-danger" *ngIf="campoNoValido('direccion')">*Dirección requerida.</p>
-                  </div>
-                </div>
-
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <label>Teléfono</label>
-                    <input type="number" formControlName="telefono" class="form-control">
-                    <p class="text-danger" *ngIf="campoNoValido('telefono')">*Teléfono requerido.</p>
-                  </div>
-                </div>
-
-                <div class="col-lg-12">
+                <div class="col-lg-3 col-md-3">
                   <div class="form-group">
                     <label>Género</label>
                     <select formControlName="genero" class="form-control">
-                      <option value="M" >Masculino</option>
-                      <option value="F" >Femenino</option>
+                      <option value="M">Mujer</option>
+                      <option value="H">Hombre</option>
+                      <option value="I">Infantil</option>
+                      <option value="C">Hogar</option>
                     </select>
                     <p class="text-danger" *ngIf="campoNoValido('genero')">*Género requerido.</p>
                   </div>
                 </div>
-
+                <div class="col-lg-3 col-md-3">
+                  <div class="form-group">
+                    <label>Talla</label>
+                    <select formControlName="talla" class="form-control">
+                      <option *ngFor="let talla of dataTalla" value="{{talla.key}}">
+                        {{talla.name}}
+                      </option>
+                    </select>
+                    <p class="text-danger" *ngIf="campoNoValido('talla')">*Talla requerida.</p>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="row">
+                <div class="col-lg-4 col-md-4">
+                  <div class="form-group">
+                    <label>Cantidad</label>
+                    <input type="number" formControlName="cantidad" min="0" class="form-control">
+                    <p class="text-danger" *ngIf="campoNoValido('cantidad')">*Cantidad requerida.</p>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                  <div class="form-group">
+                    <label>Valor unidad</label>
+                    <input type="number" formControlName="valor" min="0" class="form-control">
+                    <p class="text-danger" *ngIf="campoNoValido('valor')">*Valor requerido.</p>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                  <div class="form-group">
+                    <label>Fecha ingreso</label>
+                    <input type="date" formControlName="fecha" class="form-control">
+                    <p class="text-danger" *ngIf="campoNoValido('fecha')">*Fecha requerida.</p>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="row">
                 <div class="col-lg-12">
                   <div class="form-group">
-                    <div class="demo-checkbox">
-                      <input type="checkbox" formControlName="estado" id="md_checkbox_31" class="filled-in chk-col-light-green">
-                      <label *ngIf=" cliente['estado_us'] === 0 || cliente['estado_us'] === 1 " for="md_checkbox_31">Cliente activo <small class="text-muted">Puede inactivar el cliente si cancela el crédito. </small></label>
-                      <label *ngIf=" cliente['estado_us'] === 2 " for="md_checkbox_31">Cliente inactivo <small class="text-muted">Puede activar el cliente si inicia un crédito. </small></label>
-                    </div>
+                    <label>Comentario</label>
+                    <textarea formControlName="comentario" rows="3" class="form-control"></textarea>
+                    <p class="text-danger" *ngIf="campoNoValido('comentario')">*Comentario requerido.</p>
                   </div>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-lg-12">
-                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-info">Actualizar cliente</button>
+                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-info">Actualizar mercancía</button>
                   &nbsp;
                   <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Volver</button>
                 </div>
               </div>
-            </form> -->
+            </form>
           </div>
         </div>
+
       </div>
     </div>
   </div>
