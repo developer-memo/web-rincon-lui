@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -31,10 +32,13 @@ export class AgregarMercanciaComponent implements OnInit {
               private fb: FormBuilder,
               private router: Router,
               private mercanciaSvc: MercanciaService,
+              private currencyPipe: CurrencyPipe
   ) { }
 
   ngOnInit(): void {
     this.dataTipo = DataTipoMerca;
+    this.currencyFormatted();
+    
   }
 
 
@@ -48,15 +52,31 @@ export class AgregarMercanciaComponent implements OnInit {
 
 
   /**
+   * Método para formatear valor a moneda
+   */
+  public currencyFormatted = () =>{
+    this.formAgregarMercancia.valueChanges.subscribe( form =>{
+      if (form.valor) {
+        this.formAgregarMercancia.patchValue({
+          valor: this.currencyPipe.transform( form.valor.replace(/\D/g, '').replace(/^0+/, ''), 'USD', 'symbol', '3.0' )
+        }, {emitEvent:false});
+      }
+    });
+  }
+
+
+  /**
    * Método para agregar mercancía
    */
   public agregarMercancia = () =>{
     this.formSubmitted = true;
-
+    
     if ( this.formAgregarMercancia.invalid ) {
       return; 
     }
-
+    
+    this.formAgregarMercancia.value.valor = Number(this.formAgregarMercancia.value.valor.slice(1,100).replaceAll(',', ''));
+    
     this.mercanciaSvc.insertMercanciaService(this.formAgregarMercancia.value).subscribe( (resp:any) =>{
       Swal.fire('Bien!', resp.msg, 'success');
       setTimeout(() => { this.router.navigate(['dashboard/lista-mercancia']); Swal.close() }, 1500);
@@ -65,7 +85,6 @@ export class AgregarMercanciaComponent implements OnInit {
       Swal.fire('Error', err.error.msg, 'error');
       setTimeout(() => { Swal.close() }, 2000);
     });
-    
 
   }
 

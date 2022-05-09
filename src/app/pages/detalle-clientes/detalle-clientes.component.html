@@ -4,24 +4,24 @@
     <div class="card"> <img class="card-img" src="../assets/images/background/fondoPerfil.jpg" alt="Card image">
       <div class="card-img-overlay card-inverse social-profile text-center">
         <div class="align-self-center">
-          <img *ngIf=" cliente['genero_us'] === 'M' " src="../assets/images/hombre.png" class="img-circle" width="100">
-          <img *ngIf=" cliente['genero_us'] === 'F' " src="../assets/images/mujer.png" class="img-circle" width="100">
-          <h4 class="card-title">{{cliente['nombre_us']}}</h4>
-          <h6 class="card-subtitle">{{cliente['email_us']}}</h6>
+          <img *ngIf=" cliente.genero_us === 'M' " src="../assets/images/hombre.png" class="img-circle" width="100">
+          <img *ngIf=" cliente.genero_us === 'F' " src="../assets/images/mujer.png" class="img-circle" width="100">
+          <h4 class="card-title">{{cliente.nombre_us}}</h4>
+          <h6 class="card-subtitle">{{cliente.email_us}}</h6>
           <p class="text-white">Crédito del cliente </p>
-          <span *ngIf="cliente['estado_us'] === 1" class="label label-warning label-rounded">Activo</span>
-          <span *ngIf="cliente['estado_us'] === 0" class="label label-danger label-rounded">Inactivo</span>
+          <span *ngIf="cliente.estado_us === 1" class="label label-warning label-rounded">Activo</span>
+          <span *ngIf="cliente.estado_us === 0" class="label label-danger label-rounded">Inactivo</span>
         </div>
       </div>
     </div>
     <div class="card">
       <div class="card-body">
         <small class="text-muted">Correo electrónico </small>
-        <h6>{{cliente['email_us']}}</h6> 
+        <h6>{{cliente.email_us}}</h6> 
         <small class="text-muted p-t-30 db">Teléfono</small>
-        <h6>{{cliente['telefono_us']}}</h6> 
+        <h6>{{cliente.telefono_us}}</h6> 
         <small class="text-muted p-t-30 db">Dirección</small>
-        <h6>{{cliente['direccion_us']}}</h6>
+        <h6>{{cliente.direccion_us}}</h6>
         <div class="map-box">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d470029.1604841957!2d72.29955005258641!3d23.019996818380896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C+Gujarat!5e0!3m2!1sen!2sin!4v1493204785508" width="100%" height="150" frameborder="0" style="border:0" allowfullscreen=""></iframe>
         </div> <small class="text-muted p-t-30 db">Social Profile</small>
@@ -47,27 +47,27 @@
             <div class="row">
               <div class="col-md-3 col-xs-6 b-r"> <strong>Nombre</strong>
                 <br>
-                <p class="text-muted">{{cliente['nombre_us']}}</p>
+                <p class="text-muted">{{cliente.nombre_us}}</p>
               </div>
               <div class="col-md-3 col-xs-6 b-r"> <strong>Teléfono</strong>
                 <br>
-                <p class="text-muted">{{cliente['telefono_us']}}</p>
+                <p class="text-muted">{{cliente.telefono_us}}</p>
               </div>
               <div class="col-md-3 col-xs-6 b-r"> <strong>Email</strong>
                 <br>
-                <p class="text-muted">{{cliente['email_us']}}</p>
+                <p class="text-muted">{{cliente.email_us}}</p>
               </div>
               <div class="col-md-3 col-xs-6"> <strong>Dirección</strong>
                 <br>
-                <p class="text-muted">{{cliente['direccion_us']}}</p>
+                <p class="text-muted">{{cliente.direccion_us}}</p>
               </div>
             </div>
             <hr>
-            <p class="m-t-30">El usuario {{cliente['nombre_us']}} tiene un crédito activo, a continuación puede configurar su cuenta, crear créditos y pagos.</p>
+            <p class="m-t-30">El usuario {{cliente.nombre_us}} tiene un crédito activo, a continuación puede configurar su cuenta, crear créditos y pagos.</p>
             <div class="contBtn">
-              <button type="button" (click)="navegarCrearCredito(cliente['id_us'])" class="btn waves-effect waves-light btn-rounded btn-info">Crear crédito</button>
+              <button type="button" (click)="navegarCrearCredito(cliente.id_us)" class="btn waves-effect waves-light btn-rounded btn-info">Crear crédito</button>
               &nbsp;
-              <button type="button" (click)="navegarVerCredito(cliente['id_us'])" class="btn waves-effect waves-light btn-rounded btn-warning">Ver crédito</button>
+              <button type="button" (click)="navegarVerCredito(cliente.id_us)" class="btn waves-effect waves-light btn-rounded btn-warning">Ver crédito</button>
               &nbsp;
               <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Volver</button>
             </div>
@@ -124,8 +124,8 @@
                   <div class="form-group">
                     <div class="demo-checkbox">
                       <input type="checkbox" formControlName="estado" id="md_checkbox_31" class="filled-in chk-col-light-green">
-                      <label *ngIf=" cliente['estado_us'] === 0 || cliente['estado_us'] === 1 " for="md_checkbox_31">Cliente activo <small class="text-muted">Puede inactivar el cliente si cancela el crédito. </small></label>
-                      <label *ngIf=" cliente['estado_us'] === 2 " for="md_checkbox_31">Cliente inactivo <small class="text-muted">Puede activar el cliente si inicia un crédito. </small></label>
+                      <label *ngIf=" cliente.estado_us === 0 || cliente.estado_us === 1 " for="md_checkbox_31">Cliente activo <small class="text-muted">Puede inactivar el cliente si cancela el crédito. </small></label>
+                      <label *ngIf=" cliente.estado_us === 2 " for="md_checkbox_31">Cliente inactivo <small class="text-muted">Puede activar el cliente si inicia un crédito. </small></label>
                     </div>
                   </div>
                 </div>

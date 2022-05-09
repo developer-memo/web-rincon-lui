@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MercanciaService } from 'src/app/services/mercancia.service';
 import { DataTallas } from 'src/app/mockdata/mockdata-mercancia';
-import { Location } from '@angular/common';
+import { CurrencyPipe, Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
@@ -23,6 +23,7 @@ export class DetalleMercanciaComponent implements OnInit {
   constructor(
               private routeActive: ActivatedRoute,
               private mercanciaSrv: MercanciaService,
+              private currencyPipe: CurrencyPipe,
               private location: Location,
               private fb: FormBuilder,
               private router: Router,
@@ -33,7 +34,7 @@ export class DetalleMercanciaComponent implements OnInit {
     this.routeActive.params.subscribe( data =>{
       this.idMerca = data['id'];   
       this.getMercanciaById();
-      
+      this.currencyFormatted();
     });
   }
 
@@ -60,18 +61,34 @@ export class DetalleMercanciaComponent implements OnInit {
     })
   }
 
-  public getDataForm = (data:any) => {
+  public getDataForm = (data:any) => {    
+
     const fecha = data.fecha_merca.split('T');
-    this.formEditMercancia = this.fb.group({
-      tipo: [data.tipo_merca, [Validators.required]],
-      marca: [data.marca_merca, [Validators.required]],
-      genero: [data.genero_merca, [Validators.required]],
-      talla: [data.talla_merca, [Validators.required]],
-      cantidad: [data.cantidad_merca, [Validators.required]],
-      valor: [data.valor_merca, [Validators.required]],
-      fecha: [fecha[0], [Validators.required]],
-      comentario: [data.comentario_merca, [Validators.required]],
-    })
+    this.formEditMercancia.setValue({
+      'tipo': data.tipo_merca,
+      'marca': data.marca_merca,
+      'genero': data.genero_merca,
+      'talla': data.talla_merca,
+      'cantidad': data.cantidad_merca,
+      'valor': JSON.stringify(data.valor_merca),
+      'fecha': fecha[0],
+      'comentario': data.comentario_merca,
+    });
+  }
+
+
+
+  /**
+   * Método para formatear valor a moneda
+   */
+   public currencyFormatted = () =>{
+    this.formEditMercancia.valueChanges.subscribe( form =>{
+      if (form.valor) {
+        this.formEditMercancia.patchValue({
+          valor: this.currencyPipe.transform( form.valor.replace(/\D/g, '').replace(/^0+/, ''), 'USD', 'symbol', '3.0' )
+        }, {emitEvent:false});
+      }
+    });
   }
 
 
@@ -84,6 +101,7 @@ export class DetalleMercanciaComponent implements OnInit {
       return;
     }
 
+    this.formEditMercancia.value.valor = Number(this.formEditMercancia.value.valor.slice(1,100).replaceAll(',', ''));
     
     dataForm = { ...this.formEditMercancia.value, id:this.idMerca }
     this.mercanciaSrv.putMercaByIdService(dataForm).subscribe( (resp:any) =>{

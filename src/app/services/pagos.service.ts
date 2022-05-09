@@ -28,17 +28,12 @@ export class PagosService {
    * @param idUs => ID del cliente
    */
   public createPagosService = (formData:any, idCredito:any, idUs:any) =>{
-    const json ={
-      idUs,
-      idCredito,
-      valor: formData.valor,
-      fecha: formData.fecha,
-      comentario: formData.comentario
-    }
-    return this.http.post(`${BASE_URL}/crearPago`, json, this.httpOptions).pipe(
+    formData.idUs = idUs;
+    formData.idCredito = idCredito;
+    
+    return this.http.post(`${BASE_URL}/crearPago`, formData, this.httpOptions).pipe(
       tap( resp => resp )
     )
-
   }
 
 
@@ -46,7 +41,6 @@ export class PagosService {
    * Método de servicio para obtener los pagos
    */
   public getAllPagosService = () =>{
-
     return this.http.get(`${BASE_URL}/pagos`, this.httpOptions).pipe(
       map( resp =>resp )
     )
@@ -74,14 +68,10 @@ export class PagosService {
    * @param idPago => ID del pago
    */
   public updatePagosService = (formData:any, idPago:any) =>{
-    const json ={
-      idPago,
-      valor: formData.valor,
-      fecha: formData.fecha,
-      comentario: formData.comentario,
-      estado: formData.estado == true? 1 : 0
-    }
-    return this.http.put(`${BASE_URL}/updatePago`, json, this.httpOptions).pipe(
+    formData.idPago = idPago;
+    formData.estado = formData.estado == true? 1 : 0;
+
+    return this.http.put(`${BASE_URL}/updatePago`, formData, this.httpOptions).pipe(
       tap( resp => resp )
     )
 

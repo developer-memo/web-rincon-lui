@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
+import { CurrencyPipe, Location } from '@angular/common';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PagosService } from 'src/app/services/pagos.service';
@@ -12,13 +12,14 @@ import { PagosService } from 'src/app/services/pagos.service';
 })
 export class CrearPagosComponent implements OnInit {
 
-  public credito:any[] = [];
+  public credito:any;
   public formSubmitted:boolean = false;
   public formCrearPagos:FormGroup;
 
   constructor(
       private routeActive: ActivatedRoute,
       private pagosServ: PagosService,
+      private currencyPipe: CurrencyPipe,
       private location: Location,
       private router: Router,
       private fb: FormBuilder,
@@ -26,12 +27,26 @@ export class CrearPagosComponent implements OnInit {
 
   ngOnInit(): void {
     this.routeActive.params.subscribe( data =>{
-      this.credito = JSON.parse( data['credito'] ) || [];
-
-      console.log(this.credito)
+      this.credito = JSON.parse( data['credito'] ) || {};
     });
 
     this.cargarFormulario();
+    this.currencyFormatted();
+  }
+
+
+  /**
+   * Método para formatear valor a moneda
+   */
+   public currencyFormatted = () =>{
+    this.formCrearPagos.valueChanges.subscribe( form =>{
+      if (form.valor) {
+        this.formCrearPagos.patchValue({
+          valor: this.currencyPipe.transform( form.valor.replace(/\D/g, '').replace(/^0+/, ''), 'USD', 'symbol', '3.0' )
+        }, {emitEvent:false});
+      }
+    });
+    
   }
 
 
@@ -45,10 +60,12 @@ export class CrearPagosComponent implements OnInit {
       return;
     }
 
-    this.pagosServ.createPagosService(this.formCrearPagos.value, this.credito[0].id_cred, this.credito[0].id_us ).subscribe( (resp:any) =>{
+    this.formCrearPagos.value.valor = Number(this.formCrearPagos.value.valor.slice(1,100).replaceAll(',', ''));
+
+    this.pagosServ.createPagosService(this.formCrearPagos.value, this.credito.id_cred, this.credito.id_us ).subscribe( (resp:any) =>{
 
       Swal.fire('Bien!', resp.msg, 'success');
-      setTimeout(() => { this.router.navigate(['dashboard/detalle-credito', this.credito[0].id_us]); Swal.close(); }, 2000);
+      setTimeout(() => { this.router.navigate(['dashboard/detalle-credito', this.credito.id_us]); Swal.close(); }, 2000);
     }, (err) =>{
       Swal.fire('Error', err.error.msg, 'error');
     })

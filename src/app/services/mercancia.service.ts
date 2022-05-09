@@ -56,6 +56,15 @@ export class MercanciaService {
   }
 
 
+  /**
+   * Método DELETE de servicio para eliminar mercancía por ID
+   */
+  public deleteMercanciaService = (id:any) =>{
+    return this.http.delete(`${BASE_URL}/deleteMercancia/${id}`, this.httpOptions).pipe( tap(
+      resp => resp ));
+  }
+
+
  
 
     

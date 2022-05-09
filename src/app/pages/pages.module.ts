@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from '../components/components.module';
 
@@ -62,6 +62,7 @@ import { DetalleMercanciaComponent } from './almacen/detalle-mercancia/detalle-m
     FormsModule,
     ReactiveFormsModule,
     ComponentsModule,
-  ]
+  ],
+  providers: [ CurrencyPipe ]
 })
 export class PagesModule { }

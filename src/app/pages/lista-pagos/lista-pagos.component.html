@@ -5,7 +5,7 @@
   </div>
 
 
-  <div *ngFor=" let pago of pagos " class="col-lg-6 col-md-6">
+  <div *ngFor=" let pago of pagos " class="col-lg-4 col-md-4 col-sm-6">
     <div class="ribbon-wrapper card">
       <div (click)="navegarVerCredito(pago.id_us)" *ngIf=" pago.estado_cred == 1 " class="cursor ribbon ribbon-success">{{pago.id_cred}}</div>
       <div (click)="navegarVerCredito(pago.id_us)" *ngIf=" pago.estado_cred == 0 " class="cursor ribbon ribbon-danger">{{pago.id_cred}}</div>

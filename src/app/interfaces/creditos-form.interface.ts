@@ -7,5 +7,5 @@ export interface CreditosForm {
   periodo:string;
   cantidadCuotas:number;
   comentario:string;
-  estado:boolean;
+  estado:any;
 }

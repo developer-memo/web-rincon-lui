@@ -28,18 +28,9 @@ export class CreditosService {
    * @param iUs => ID del cliente
    */
   public createCreditoService = (formData:CreditosForm, idUs:any) =>{
-    const json ={
-      idUs,
-      monto: formData.monto,
-      fecha: formData.fecha,
-      periodo: formData.periodo,
-      cantidad: formData.cantidadCuotas,
-      valorcuota: formData.valorcuota,
-      comentario: formData.comentario
-    }
     
-  
-    return this.http.post(`${BASE_URL}/insertCredito`, json, this.httpOptions).pipe(
+    formData.idUs = idUs;
+    return this.http.post(`${BASE_URL}/insertCredito`, formData, this.httpOptions).pipe(
       tap( resp => resp )
     )
 
@@ -76,16 +67,11 @@ export class CreditosService {
    * @param idCredito => ID del crédito
    */
   public updateCreditoService = (formData: CreditosForm, idCredito:any) =>{
-
-    const json = {
-      idCredito,
-      monto: formData.monto,
-      periodo: formData.periodo,
-      valorcuota: formData.valorcuota,
-      comentario: formData.comentario, 
-      estado: formData.estado == true? 1 : 0
-    }
-    return this.http.put(`${BASE_URL}/updateCredito`, json, this.httpOptions).pipe(
+    
+    formData.idCredito = idCredito;
+    formData.estado = formData.estado == true? 1 : 0;
+    
+    return this.http.put(`${BASE_URL}/updateCredito`, formData, this.httpOptions).pipe(
       tap( resp => resp )
     )
 

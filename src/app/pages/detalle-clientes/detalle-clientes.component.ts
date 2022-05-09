@@ -12,21 +12,21 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class DetalleClientesComponent implements OnInit {
 
-  public cliente:any[] = [];
+  public cliente:any = {};
   public formEditCliente:FormGroup;
   public formSubmitted = false;
 
   constructor( 
               private routeActive: ActivatedRoute,
-              private fb: FormBuilder,
-              private router: Router,
-              private location: Location,
               private clienteServ: UsuarioService,
+              private location: Location,
+              private router: Router,
+              private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
     this.routeActive.params.subscribe( data => {
-      this.cliente = JSON.parse( data['cliente'] ) || [];
+      this.cliente = JSON.parse( data['cliente'] ) || {};
     });
 
     this.iniciarFormulario();    
@@ -46,7 +46,7 @@ export class DetalleClientesComponent implements OnInit {
     this.clienteServ.updateClienteService(this.formEditCliente.value, this.cliente['id_us']).subscribe( (resp:any) =>{
       
       Swal.fire('Bien!', resp.msg, 'success');
-      setTimeout(() => { this.router.navigate(['dashboard/lista-clientes']) }, 2000);
+      setTimeout(() => { this.router.navigate(['dashboard/lista-clientes']); Swal.close(); }, 2000);
 
     }, (err) =>{
       Swal.fire('Error', err.error.msg, 'error');
@@ -66,14 +66,14 @@ export class DetalleClientesComponent implements OnInit {
     } else {
       estado = false;
     }
-    this.formEditCliente = this.fb.group({
-      nombre: [cliente.nombre_us, [Validators.required, Validators.minLength(5)]],
-      email: [cliente.email_us, [Validators.required, Validators.email, Validators.minLength(6)]],
-      direccion: [cliente.direccion_us, [Validators.required, Validators.minLength(5)]],
-      telefono: [cliente.telefono_us, [Validators.required, Validators.minLength(5)]],
-      genero: [cliente.genero_us, [Validators.required]],
-      estado: [estado, [Validators.required]],
-    })
+    this.formEditCliente.setValue({
+      'nombre': cliente.nombre_us,
+      'email': cliente.email_us,
+      'direccion': cliente.direccion_us,
+      'telefono': cliente.telefono_us,
+      'genero': cliente.genero_us,
+      'estado': estado
+    });
   }
 
 

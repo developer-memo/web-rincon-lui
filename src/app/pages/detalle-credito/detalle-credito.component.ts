@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { CurrencyPipe, Location } from '@angular/common';
 import Swal from 'sweetalert2';
 import { CreditosService } from 'src/app/services/creditos.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,7 +15,7 @@ export class DetalleCreditoComponent implements OnInit {
 
   public idCliente:string;
   public creditoActivo = false;
-  public credito:any[] = [];
+  public credito:any = [];
   public pagos:any[] = [];
   public formEditCredito:FormGroup;
   public formSubmitted = false;
@@ -25,6 +25,7 @@ export class DetalleCreditoComponent implements OnInit {
               private routeActive: ActivatedRoute,
               private creditoServ: CreditosService,
               private pagosServ: PagosService,
+              private currencyPipe: CurrencyPipe,
               private location: Location,
               private router: Router,
               private fb: FormBuilder,
@@ -38,8 +39,8 @@ export class DetalleCreditoComponent implements OnInit {
     });
 
     this.cargarFormulario();
+    this.currencyFormatted();
   }
-
 
 
   /**
@@ -49,9 +50,8 @@ export class DetalleCreditoComponent implements OnInit {
   public getCreditoById = (idCliente:any) => {
     this.creditoServ.getCreditoByIdService(idCliente).subscribe( (resp:any) =>{
 
-      this.credito = resp.credito || [];
-
-      this.getPagosById(this.credito[0].id_cred);
+      resp.credito.forEach( (cr:any) => this.credito = cr);        
+      this.getPagosById(this.credito.id_cred);
 
     }, (err) =>{
       Swal.fire('Advertencia', 'No hay créditos para este cliente.', 'warning');
@@ -71,13 +71,16 @@ export class DetalleCreditoComponent implements OnInit {
       return;
     }
 
-    this.creditoServ.updateCreditoService(this.formEditCredito.value, this.credito[0].id_cred).subscribe( (resp:any) =>{
+    this.formEditCredito.value.monto = Number(this.formEditCredito.value.monto.slice(1,100).replaceAll(',', ''));
 
+    this.formEditCredito.value.valorcuota = Number(this.formEditCredito.value.valorcuota.slice(1,100).replaceAll(',', ''));
+
+    this.creditoServ.updateCreditoService(this.formEditCredito.value, this.credito.id_cred).subscribe( (resp:any) =>{
       Swal.fire('Bien!', resp.msg, 'success');
-      setTimeout(() => { window.location.reload(); }, 2000);
+      setTimeout(() => { this.router.navigate(['dashboard/lista-creditos']); Swal.close() }, 1500);
 
     }, (err) =>{
-      Swal.fire('Error', err.msg, 'error');
+      Swal.fire('Error', err.error.msg, 'error');
     })
 
   }
@@ -88,11 +91,9 @@ export class DetalleCreditoComponent implements OnInit {
    * @param idCredito => ID del crédito
    */
   public getPagosById = (idCredito:any) =>{
-
     this.pagosServ.getPagosByIdService(idCredito).subscribe( (resp:any) =>{
 
       this.pagos = resp.pagos || [];
-
       this.pagos.forEach( pag =>{
         this.totalPagado += pag.valor_pag;
       })
@@ -104,18 +105,40 @@ export class DetalleCreditoComponent implements OnInit {
   }
 
 
+  /**
+   * Método para formatear valor a moneda
+   */
+   public currencyFormatted = () =>{
+    this.formEditCredito.valueChanges.subscribe( form =>{
+      if (form.monto) {
+        this.formEditCredito.patchValue({
+          monto: this.currencyPipe.transform( form.monto.replace(/\D/g, '').replace(/^0+/, ''), 'USD', 'symbol', '3.0' )
+        }, {emitEvent:false});
+      }
+
+      if (form.valorcuota) {
+        this.formEditCredito.patchValue({
+          valorcuota: this.currencyPipe.transform( form.valorcuota.replace(/\D/g, '').replace(/^0+/, ''), 'USD', 'symbol', '3.0' )
+        }, {emitEvent:false});
+      }
+    });
+    
+  }
+
+
+
 
   /**
    * Método para cargar el formulario
    */
   public cargarEditFormulario = () =>{
-    this.formEditCredito = this.fb.group({
-      monto: [this.credito[0].monto_cred, [Validators.required, Validators.minLength(4)]],
-      plazo: [this.credito[0].plazo_cred, [Validators.required, Validators.minLength(5)]],
-      valorcuota: [this.credito[0].valorcuota_cred, [Validators.required, Validators.minLength(4)]],
-      comentario: [this.credito[0].comentario_cred, [Validators.required, Validators.minLength(5)]],
-      estado: [this.credito[0].estado_cred == 1? true : false, [Validators.required]],
-    })
+    this.formEditCredito.setValue({
+      'monto': JSON.stringify(this.credito.monto_cred),
+      'periodo': this.credito.periodo_cred,
+      'valorcuota': JSON.stringify(this.credito.valorcuota_cred),
+      'comentario': this.credito.comentario_cred,
+      'estado': this.credito.estado_cred == 1? true : false,
+    });
   }
 
 
@@ -127,7 +150,7 @@ export class DetalleCreditoComponent implements OnInit {
   public cargarFormulario = () =>{
     this.formEditCredito = this.fb.group({
       monto: ['', [Validators.required, Validators.minLength(4)]],
-      plazo: ['', [Validators.required, Validators.minLength(5)]],
+      periodo: ['', [Validators.required]],
       valorcuota: ['', [Validators.required, Validators.minLength(4)]],
       comentario: ['', [Validators.required, Validators.minLength(5)]],
       estado: ['', [Validators.required]],

@@ -81,6 +81,15 @@ export class UsuarioService {
     )
   }
 
+
+
+  /**
+   * Método de servicio para eliminar usuario por ID
+   */
+  public deleteUserService = (id:any) =>{
+    return this.http.delete(`${BASE_URL}/deleteUser/${id}`, this.httpOptions).pipe( tap( resp => resp ));
+  }
+
   
 
   

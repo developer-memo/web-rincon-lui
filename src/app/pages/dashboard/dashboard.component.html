@@ -6,7 +6,7 @@
           <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/income.png" alt="Income"></div>
           <div class="align-self-center">
             <h6 class="text-muted m-t-10 m-b-0">Base Prestamos</h6>
-            <h2 class="m-t-0"> {{finanzas[0]?.base_pres_fina | currency: 'USD'}} </h2></div>
+            <h2 class="m-t-0"> {{finanzas[0]?.base_pres_fina | currency: 'USD':'symbol':'3.0'}} </h2></div>
         </div>
       </div>
     </div>
@@ -18,7 +18,7 @@
           <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/expense.png" alt="Income"></div>
           <div class="align-self-center">
             <h6 class="text-muted m-t-10 m-b-0">Total Pagado</h6>
-            <h2 class="m-t-0"> {{totalPagado | currency: 'USD'}} </h2>
+            <h2 class="m-t-0"> {{totalPagado | currency: 'USD':'symbol':'3.0'}} </h2>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@
           <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income"></div>
           <div class="align-self-center">
             <h6 class="text-muted m-t-10 m-b-0">Base Financiera</h6>
-            <h2 class="m-t-0">{{finanzas[0]?.base_fina | currency: 'USD'}}</h2></div>
+            <h2 class="m-t-0">{{finanzas[0]?.base_fina | currency: 'USD':'symbol':'3.0'}}</h2></div>
         </div>
       </div>
     </div>
@@ -120,7 +120,7 @@
                     <tr>
                       <td class="m-r-10 b-0"><img class="logoCreditos" src="../assets/images/logo-icon.png" alt="user"></td>
                       <td class="b-0">
-                        <h5 class="m-b-0 font-medium "> {{credito.monto_cred | currency: 'USD'}} </h5>
+                        <h5 class="m-b-0 font-medium "> {{credito.monto_cred | currency: 'USD':'symbol':'3.0'}} </h5>
                         <h6> {{credito.plazo_cred}} Pagos</h6>
                       </td>
                       <td *ngIf="credito.estado_cred == 1" ><span class="label label-warning label-rounded">Activo</span></td>

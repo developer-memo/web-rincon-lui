@@ -34,7 +34,6 @@ export class ListaCreditosComponent implements OnInit {
     this.creditosServ.getAllCreditosService().subscribe( (resp:any) =>{
 
       this.creditos = resp.creditos || [];
-      console.log(this.creditos)
 
     }, (err) =>{
       console.error(err.error);
@@ -48,7 +47,6 @@ export class ListaCreditosComponent implements OnInit {
    public getAllPagos = () =>{
 
     this.pagosServ.getAllPagosService().subscribe( (resp:any) =>{
-
       this.pagos = resp.pagos || [];
       this.pagos.forEach( pag =>{
         this.totalPagos += pag.valor_pag;

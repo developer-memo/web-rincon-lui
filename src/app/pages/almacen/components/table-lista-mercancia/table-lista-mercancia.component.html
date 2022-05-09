@@ -21,7 +21,7 @@
         <td class="td_acciones">
           <button type="button" class="btn btn-small btn-success btn-rounded" (click)="detalleMerca(merca.id_merca)"> <i class="fa fa-eye" aria-hidden="true"></i> </button>
           &nbsp;
-          <button type="button" class="btn btn-small btn-danger btn-rounded" > <i class="fa fa-trash" aria-hidden="true"></i> </button>
+          <button type="button" (click)="deleteMercancia(merca.id_merca)" class="btn btn-small btn-danger btn-rounded" > <i class="fa fa-trash" aria-hidden="true"></i> </button>
         </td>
       </tr>
     </tbody>

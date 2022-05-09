@@ -50,6 +50,41 @@ export class ListaClientesComponent implements OnInit {
     this.router.navigate(['dashboard/detalle-clientes', ObjCliente]);
 
   }
+
+
+
+  /**
+   * Método para eliminar usuario por id
+   */
+  public deleteUser = (id:any) =>{
+    Swal.fire({
+      title: '¿Desea eliminar este usuario de la lista?',
+      text: "No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar!'
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        this.clientesServ.deleteUserService(id).subscribe( (resp:any) =>{
+          Swal.fire('Bien!', resp.msg, 'success');
+          this.clientes = this.clientes.filter( cl => cl.id_us != id );
+    
+        }, err =>{
+          Swal.fire('Error', err.error.msg, 'error');
+          
+        })
+        setTimeout(() => { Swal.close() }, 2000);
+        
+      }
+    });
+
+
+    
+    
+  }
   
 
 }

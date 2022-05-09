@@ -2,15 +2,15 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Crear pagos al crédito {{credito[0].id_cred}}</h4>
-        <h6 class="card-subtitle">En el siguiente formulario, puede crear pagos al crédito de {{credito[0].nombre_us}}.</h6>
+        <h4 class="card-title">Crear pagos al crédito {{credito.id_cred}}</h4>
+        <h6 class="card-subtitle">En el siguiente formulario, puede crear pagos al crédito de {{credito.nombre_us}}.</h6>
         <form [formGroup]="formCrearPagos" (submit)="crearPagos()" class="form-material m-t-40">
 
           <div class="row">
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <label>Valor pago</label>
-                <input type="number" formControlName="valor" class="form-control">
+                <input type="text" formControlName="valor" class="form-control">
                 <p class="text-danger" *ngIf="campoNoValido('valor')">*Valor requerido.</p>
               </div>
             </div>
